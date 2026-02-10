@@ -2,26 +2,87 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>San Valentín 💖</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
+  <title>Carta 💌</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #ffe6eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
 
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 3s linear forwards;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      display: none;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 300px;
+    }
+
+    .card h1 {
+      color: #e6005c;
+    }
+  </style>
+</head>
 <body>
 
-  <div class="san_valentin" id="carta">
-    <div class="tapa">❤️</div>
+<div class="card" id="card">
+  <h1>💖 Feliz San Valentín 💖</h1>
+  <p>Te amo mucho mi princesa hermosa 👑💕</p>
+  <p>Besos 😘<br>Gracias por estar conmigo 💌</p>
+</div>
 
-    <div class="mensaje">
-      Feliz San Valentín adelantado 💕<br><br>
-      Te amo mucho mi princesa hermosa 👑💖<br><br>
-      Besos 😘<br>
-      Y gracias por estar conmigo 💌
-    </div>
-  </div>
+<script>
+  let count = 0;
 
-  <div class="corazones"></div>
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
 
-  <!-- IMPORTANTE: defer -->
-  <script src="script.js" defer></script>
+    setTimeout(() => heart.remove(), 3000);
+
+    count++;
+    if (count === 12) {
+      setTimeout(() => {
+        document.getElementById("card").style.display = "block";
+      }, 500);
+    }
+  }
+
+  const interval = setInterval(() => {
+    if (count < 12) {
+      createHeart();
+    } else {
+      clearInterval(interval);
+    }
+  }, 300);
+</script>
+
 </body>
 </html>
